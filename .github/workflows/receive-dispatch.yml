@@ -77,10 +77,10 @@ jobs:
         $IssueBodyContentPath = (Resolve-Path ".\IssueBodyContent.txt").Path
 
         Write-Output "Creating GitHub issue '$IssueTitle' in repo '$IssueRepo'."
-        gh issue create --repo $IssueRepo --title $IssueTitle `
-          --body-file $IssueBodyContentPath `
-          --project ${{ env.ISSUE_PROJECT }} `
-          --milestone ${{ env.ISSUE_MILESTONE }} `
-          --label ${{ env.ISSUE_LABEL_CSV }}
+        gh issue create --repo "$IssueRepo" --title "$IssueTitle" `
+          --body-file "$IssueBodyContentPath" `
+          --project "${{ env.ISSUE_PROJECT }}" `
+          --milestone "${{ env.ISSUE_MILESTONE }}" `
+          --label "${{ env.ISSUE_LABEL_CSV }}"
       env:
         GH_TOKEN: ${{ github.token }}
