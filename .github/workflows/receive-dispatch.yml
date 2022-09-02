@@ -79,7 +79,6 @@ jobs:
         Write-Output "Creating GitHub issue '$IssueTitle' in repo '$IssueRepo'."
         gh issue create --repo "$IssueRepo" --title "$IssueTitle" `
           --body-file "$IssueBodyContentPath" `
-          # --project "${{ env.ISSUE_PROJECT }}" ` # Disabled because GH CLI doesn't support new version of projects
           --milestone "${{ env.ISSUE_MILESTONE }}" `
           --label "${{ env.ISSUE_LABEL_CSV }}"
       env:
