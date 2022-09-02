@@ -1,1 +1,1 @@
-# github-action-issues
+# Github Action Issues
