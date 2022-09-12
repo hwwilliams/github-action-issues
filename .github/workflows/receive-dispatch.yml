@@ -27,7 +27,7 @@ jobs:
         Write-Output "Getting workflow logs from repo '${{ inputs.FAILED_WORKFLOW_REPO_NAME }}' and workflow with ID '${{ inputs.FAILED_WORKFLOW_RUN_ID }}'."
 
         # Get all jobs from workflow run
-        $RunDetails = gh run -R https://github.com/${{ inputs.FAILED_WORKFLOW_REPO_NAME }} view ${{ inputs.FAILED_WORKFLOW_RUN_ID }}
+        $RunDetails = gh run -R https://github.com/asdasdaasd${{ inputs.FAILED_WORKFLOW_REPO_NAME }} view ${{ inputs.FAILED_WORKFLOW_RUN_ID }}
 
         if ($null -eq $RunDetails)
         {
