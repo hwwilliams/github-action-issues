@@ -81,10 +81,15 @@ jobs:
         $IssueTitle = "${{ env.ISSUE_TITLE_PREFIX }} - ${{ inputs.FAILED_WORKFLOW_REPO_NAME }}"
         $IssueBodyContentPath = (Resolve-Path ".\IssueBodyContent.txt").Path
 
-        Write-Output "Creating GitHub issue '$IssueTitle' in repo '$IssueRepo'."
-        gh issue create --repo "$IssueRepo" --title "$IssueTitle" `
+        Write-Output "Attempting to create GitHub issue '$IssueTitle' in repo '$IssueRepo'."
+        $CreatedIssue = gh issue create --repo "$IssueRepo" --title "$IssueTitle" `
           --body-file "$IssueBodyContentPath" `
           --milestone "${{ env.ISSUE_MILESTONE }}" `
           --label "${{ env.ISSUE_LABEL_CSV }}"
+
+        if ($null -eq $CreatedIssue)
+        {
+          Write-Error "Failed to create GitHub issue for failed workflow."
+        }
       env:
         GH_TOKEN: ${{ github.token }}
