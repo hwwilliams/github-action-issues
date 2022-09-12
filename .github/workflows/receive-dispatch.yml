@@ -51,11 +51,19 @@ jobs:
         }
 
         # Remove ANSI color codes from output
-        $CleanFailedJobLogs = $FailedJobLogs.ForEach({ $PSItem -replace '\x1b\[[0-9;]*m','' })
+        $CleanAnsiFailedJobLogs = $FailedJobLogs.ForEach({ $PSItem -replace '\x1b\[[0-9;]*m','' })
 
-        if ($CleanFailedJobLogs.Count -eq 0)
+        if ($CleanAnsiFailedJobLogs.Count -eq 0)
         {
           Write-Error "Found 0 failed workflow job logs after ANSI color code removal. Failed workflow job logs are expected when this workflow is ran."
+        }
+
+        # Remove GitHub Action log groups from output
+        $CleanGroupsFailedJobLogs = $CleanAnsiFailedJobLogs -Replace '##\[group\]|##\[endgroup\]', ''
+
+        if ($CleanGroupsFailedJobLogs.Count -eq 0)
+        {
+          Write-Error "Found 0 failed workflow job logs after GitHub Action log group removal. Failed workflow job logs are expected when this workflow is ran."
         }
 
         # Build GitHub issue body content
@@ -67,7 +75,7 @@ jobs:
         $IssueBodyContent += ''
         $IssueBodyContent += '### Error'
         $IssueBodyContent += '```txt'
-        $IssueBodyContent += $CleanFailedJobLogs
+        $IssueBodyContent += $CleanGroupsFailedJobLogs
         $IssueBodyContent += '```'
         $IssueBodyContentPath = ".\IssueBodyContent.txt"
         $IssueBodyContent | Out-File -FilePath $IssueBodyContentPath -Force
