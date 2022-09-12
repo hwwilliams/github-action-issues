@@ -43,7 +43,7 @@ jobs:
         }
 
         # Get failed job workflow logs
-        $FailedJobLogs = $FailedJobIds.ForEach({ gh run -R https://github.com/TESTING${{ inputs.FAILED_WORKFLOW_REPO_NAME }} view -j $PSItem --log-failed }) | Sort-Object
+        $FailedJobLogs = $FailedJobIds.ForEach({ gh run -R https://github.com/${{ inputs.FAILED_WORKFLOW_REPO_NAME }} view -j $PSItem --log-failed }) | Sort-Object
 
         if ($FailedJobLogs.Count -eq 0)
         {
