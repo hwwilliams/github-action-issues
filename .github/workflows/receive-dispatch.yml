@@ -91,5 +91,9 @@ jobs:
         {
           Write-Error "Failed to create GitHub issue for failed workflow."
         }
+        elseif ($null -ne $CreatedIssue) -and ($CreatedIssue -ilike "*$IssueRepo*")
+        {
+          Write-Output "Successfully created GitHub issue for failed workflow."; $CreatedIssue
+        }
       env:
         GH_TOKEN: ${{ github.token }}
