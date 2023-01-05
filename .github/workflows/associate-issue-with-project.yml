@@ -9,7 +9,8 @@ env:
 
 on:
   issues:
-    types: [opened]
+    types:
+      - opened
 
 jobs:
   add-to-project:
