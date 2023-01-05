@@ -1,0 +1,22 @@
+name: Add New Issues to Project
+
+env:
+  AUTO_PR_GH_PAT: ${{ secrets.GH_TOKEN_PAT }}
+
+  ORGANIZATION_NAME: hwwilliams
+  # Project 4 is Test Project
+  PROJECT_ID: 4
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-to-project:
+    name: Add Issue to Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.4.0
+        with:
+          project-url: https://github.com/orgs/${{ env.ORGANIZATION_NAME }}/projects/${{ env.PROJECT_ID }}
+          github-token: ${{ env.AUTO_PR_GH_PAT }}

@@ -3,7 +3,6 @@ name: receive-dispatch
 env:
   ISSUE_LABEL_CSV: bug
   ISSUE_MILESTONE: Test Milestone
-  ISSUE_PROJECT: Test Project # CLI doesn't support new projects: https://github.com/cli/cli/issues/4547
   ISSUE_TITLE_PREFIX: Workflow Failed
 
 on:
